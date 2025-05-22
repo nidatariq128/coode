@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZN Jewelers Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    select, button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .copy-btn { background-color: #007bff; color: white; }
+    .wa-btn { background-color: #25D366; color: white; text-decoration: none; display: inline-block; }
+    .number { font-size: 20px; color: #555; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>ZN Jewelers Payment</h1>
+  <p>Select amount to pay:</p>
+
+  <select id="amount">
+    <option value="500">Rs. 500</option>
+    <option value="1000">Rs. 1000</option>
+    <option value="2000">Rs. 2000</option>
+  </select>
+
+  <br />
+  <button class="copy-btn" onclick="copyPaymentDetails()">Copy Payment Info</button>
+
+  <p class="number">JazzCash/Easypaisa Number:<br><strong>03178113817</strong></p>
+
+  <a class="wa-btn" id="waLink" target="_blank">Confirm via WhatsApp</a>
+
+  <script>
+    function copyPaymentDetails() {
+      const amount = document.getElementById('amount').value;
+      const message = `Send Rs. ${amount} to 03178113817 via JazzCash or Easypaisa.`;
+      navigator.clipboard.writeText(message).then(() => {
+        alert("Copied:\n" + message);
+      });
+
+      // Update WhatsApp link
+      const encodedMessage = encodeURIComponent(message);
+      const waURL = `https://wa.me/923178113817?text=${encodedMessage}`;
+      document.getElementById('waLink').href = waURL;
+      document.getElementById('waLink').textContent = "Confirm via WhatsApp";
+    }
+  </script>
+</body>
+</html>
